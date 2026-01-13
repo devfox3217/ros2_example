@@ -1,0 +1,26 @@
+# ROS 2 build directories
+build/
+install/
+log/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C++ build files
+cmake-build-debug/
+cmake-build-release/
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Colcon generated files
+COLCON_IGNORE

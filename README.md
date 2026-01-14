@@ -3,30 +3,56 @@
 이 프로젝트는 ROS 2 Humble 버전을 기준으로 다양한 기능을 학습하기 위해 만들어진 예제 모음입니다.
 Topic, Service, Action, Launch, Parameter, Camera 등 ROS 2의 핵심 개념을 단계별로 실습할 수 있습니다.
 
+## 0. ROS 2 설치 (필수)
+
+이 프로젝트를 실행하려면 **ROS 2 Humble**이 설치되어 있어야 합니다.
+아직 설치하지 않았다면, 일본의 로봇 엔지니어 **Tiryoh**님이 만든 간편 설치 스크립트를 사용하는 것을 추천합니다. (Ubuntu 22.04 기준)
+
+```bash
+# 1. 설치 스크립트 저장소 클론
+git clone https://github.com/Tiryoh/ros2_setup_scripts_ubuntu.git
+
+# 2. 스크립트 실행 폴더로 이동
+cd ros2_setup_scripts_ubuntu
+
+# 3. 설치 스크립트 실행 (시간이 조금 걸립니다)
+./run.sh
+
+# 4. 설치가 완료되면 재부팅하는 것이 좋습니다.
+sudo reboot
+```
+
+---
+
 ## 1. 환경 설정 및 설치
 
 ### 필수 요구 사항
 *   Ubuntu 22.04 LTS
-*   ROS 2 Humble Hawksbill
+*   ROS 2 Humble Hawksbill (위의 방법으로 설치 가능)
 *   Python 3
 
-### 설치 방법
-이 저장소를 클론한 후, 필요한 의존성 패키지를 설치하고 빌드합니다.
+### 프로젝트 설치 방법
+ROS 2가 설치된 상태에서 이 저장소를 클론하고 빌드합니다.
 
 ```bash
 # 1. 저장소 클론
 git clone <REPO_URL> ros2_example
 cd ros2_example
 
-# 2. 의존성 설치 (rosdep 사용)
+# 2. 실행 권한 부여 (필수!)
+# 스크립트 파일들을 실행할 수 있도록 권한을 설정합니다.
+chmod +x *.sh
+
+# 3. 의존성 설치 (rosdep 사용)
+# 시스템에 필요한 라이브러리(OpenCV 등)를 자동으로 설치합니다.
 sudo apt update
 rosdep update
 rosdep install --from-paths src --ignore-src -y
 
-# 3. 전체 빌드
+# 4. 전체 빌드
 colcon build
 
-# 4. 환경 설정
+# 5. 환경 설정
 source install/setup.bash
 ```
 
@@ -95,6 +121,10 @@ USB 카메라 영상을 읽어서 토픽으로 발행하는 예제입니다.
 *   **create_pkg.sh**: 새로운 패키지를 쉽게 생성해주는 스크립트입니다.
     ```bash
     ./create_pkg.sh <패키지명> [p|c]  # p: Python, c: C++
+    ```
+*   **clean.sh**: 빌드 결과물(build, install, log)을 삭제하여 워크스페이스를 초기화합니다.
+    ```bash
+    ./clean.sh
     ```
 
 ## 4. 라이선스

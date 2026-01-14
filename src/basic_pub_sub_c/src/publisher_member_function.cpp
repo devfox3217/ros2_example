@@ -39,11 +39,12 @@ class MinimalPublisher : public rclcpp::Node
       // ---------------------------------------------------------
       char buffer[100]; // C언어 문자열 버퍼
 
-      // C 함수 호출
+      // C 함수 호출 (현재 카운트에 1을 더함)
       int next_count = c_style_add(count_, 1);
 
       // C언어 문자열 포맷팅
-      snprintf(buffer, sizeof(buffer), "Hello World (C Style): %d", count_);
+      // 수정: count_ 대신 next_count를 사용하여 변수를 활용함
+      snprintf(buffer, sizeof(buffer), "Hello World (C Style): %d", next_count);
 
       // C++ string에 C 문자열 대입
       message.data = buffer;
@@ -52,7 +53,7 @@ class MinimalPublisher : public rclcpp::Node
       RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
 
       // C언어 표준 출력 (printf)도 사용 가능합니다.
-      printf("[C-printf] Sent message number: %d\n", count_);
+      printf("[C-printf] Sent message number: %d\n", next_count);
 
       publisher_->publish(message);
       count_++;

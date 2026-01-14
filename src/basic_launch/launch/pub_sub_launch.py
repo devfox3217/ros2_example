@@ -10,7 +10,6 @@ def generate_launch_description():
             name='my_talker',             # 노드 이름 변경 (선택 사항)
             output='screen'               # 로그를 터미널에 출력
         ),
-        
         # Subscriber 노드 실행
         Node(
             package='basic_pub_sub',
